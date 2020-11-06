@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ./images
+docker load -i <АРХИВ С ОБРАЗАМИ>
+cd ..

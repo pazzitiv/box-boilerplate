@@ -1,0 +1,4 @@
+#!/bin/bash
+./docker-install-1604
+./app-install
+./rebuild

@@ -1,0 +1,6 @@
+ ## External issues trackers
+  issues_tracker:
+    redmine:
+      project_url: "https://redmine.ptnl.moscow/projects/mosmetro"
+      issues_url: "https://redmine.ptnl.moscow/issues/:id"
+      new_issue_url: "https://redmine.ptnl.moscow/projects/mosmetro/issues/new"

@@ -1,0 +1,68 @@
+version: "3.4"
+
+services:
+  frontend:
+    container_name: 'dashboards_frontend'
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: always
+    volumes:
+      - app-frontend:/app/frontend
+    networks:
+      frontend:
+      backend:
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+      - backend
+    links:
+      - backend
+    environment:
+      - TZ=Europe/Moscow
+
+  backend:
+    container_name: 'dashboards_backend'
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      network: bridge
+    restart: always
+    volumes:
+      - app-backend:/app/backend
+    networks:
+      frontend:
+      backend:
+    environment:
+      - TZ=Europe/Moscow
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    container_name: 'dashboards_db'
+    build:
+      context: .
+      dockerfile: docker/db/Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_DB=mosmetro
+      - POSTGRES_USER=mosmetro
+      - POSTGRES_PASSWORD=8cu6BeGaV2t
+      - TZ=Europe/Moscow
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      backend:
+
+networks:
+  frontend:
+  backend:
+
+
+volumes:
+  app-frontend:
+  app-backend:
+  db-data:

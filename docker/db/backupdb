@@ -1,0 +1,2 @@
+#!/bin/bash
+pg_dump -U quadra --dbname=quadra --file=/backup/quadra-$(date +%Y-%m-%d-%H-%M).sql
